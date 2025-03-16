@@ -1,0 +1,23 @@
+[project]
+name = "talentscout"
+version = "0.1.0"
+description = "TalentScout using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.105.0,<1.0.0"
+]
+
+[project.scripts]
+talentscout = "talentscout.main:run"
+run_crew = "talentscout.main:run"
+train = "talentscout.main:train"
+replay = "talentscout.main:replay"
+test = "talentscout.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

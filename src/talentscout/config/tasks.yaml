@@ -1,0 +1,37 @@
+# config/tasks.yaml
+greet_user:
+  description: >
+    Greet the candidate and explain the process. Check for exit keywords.
+  expected_output: >
+    Friendly greeting and process explanation. Detect if user wants to exit.
+  agent: greeting_agent
+  # output_json: greeting_response
+
+collect_info:
+  description: >
+    Collect candidate details: name, email, phone, experience, position, location, tech stack.
+    Ask one question at a time. Validate inputs.
+  expected_output: >
+    Structured JSON with candidate information and tech stack list.
+  agent: info_collector
+  context: 
+    - greet_user
+
+generate_questions:
+  description: >
+    Generate 3-5 technical questions for each technology in tech stack.
+    Questions should progress from basic to advanced.
+  expected_output: >
+    Markdown formatted questions grouped by technology.
+  agent: tech_question_generator
+  context: 
+    - collect_info
+
+exit_conversation:
+  description: >
+    Handle conversation termination, provide next steps, and thank candidate.
+  expected_output: >
+    Polite conclusion message with next steps.
+  agent: exit_agent
+  context: 
+    - greet_user
